@@ -1,0 +1,12 @@
+{
+  "product": "Open Source Point of Sale",
+  "version": "3.4.3",
+  "upstream_repository": "https://github.com/opensourcepos/opensourcepos",
+  "upstream_release": "https://github.com/opensourcepos/opensourcepos/releases/tag/3.4.3",
+  "upstream_commit": "35b68245a00bb66b40aea53e2be3478e4558854d",
+  "upstream_tree": "de886d996e0efeea1c9b1e9c2ea930fc19191546",
+  "source_directory": "Code/ospos",
+  "baseline_tag": "baseline-ospos-3.4.3",
+  "imported_on": "2026-11-12",
+  "import_method": "Unmodified upstream Git tree imported as regular files; upstream history is not part of the project branch."
+}

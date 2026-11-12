@@ -1,0 +1,45 @@
+name: Yêu cầu thay đổi
+description: Ghi nhận yêu cầu bảo trì từ khảo sát thực tế
+title: "[CR-xxx] "
+body:
+  - type: input
+    id: change-id
+    attributes:
+      label: Mã yêu cầu
+      placeholder: CR-001
+    validations:
+      required: true
+  - type: dropdown
+    id: maintenance-type
+    attributes:
+      label: Loại bảo trì
+      options:
+        - Hiệu chỉnh lỗi
+        - Thích ứng
+        - Hoàn thiện
+        - Dự phòng
+    validations:
+      required: true
+  - type: textarea
+    id: current-behavior
+    attributes:
+      label: Hiện trạng và bằng chứng
+      description: Ghi phiên bản, dữ liệu thử, bước tái hiện và liên kết minh chứng.
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Thay đổi mong muốn và tiêu chí chấp nhận
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Phân tích tác động và các phương án
+      description: Chỉ rõ tài liệu, file bị ảnh hưởng; so sánh ít nhất hai giải pháp trước khi phê duyệt thực hiện.
+  - type: textarea
+    id: validation
+    attributes:
+      label: Kế hoạch kiểm thử và quyết định của nhóm
+      description: Ghi người phụ trách, ưu tiên, quyết định và các test case liên quan khi đã xác định.
