@@ -1,0 +1,13 @@
+.git
+**/.git
+**/.env
+**/.env.*
+!**/.env.example
+**/node_modules
+**/vendor
+**/dist
+**/coverage
+**/*.log
+.local
+backups
+tmp

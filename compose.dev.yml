@@ -1,0 +1,41 @@
+name: ospos-project2
+
+services:
+  mysql:
+    image: mariadb:10.11
+    environment:
+      MARIADB_DATABASE: ospos
+      MARIADB_USER: admin
+      MARIADB_PASSWORD: pointofsale
+      MARIADB_RANDOM_ROOT_PASSWORD: "1"
+    volumes:
+      - database:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 30s
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  ospos:
+    image: ospos-project2:3.4.3
+    pull_policy: never
+    depends_on:
+      mysql:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8080:80"
+    volumes:
+      - type: bind
+        source: ./Code/ospos/.env
+        target: /app/.env
+        read_only: true
+        bind:
+          create_host_path: false
+      - uploads:/app/public/uploads
+      - runtime:/app/writable
+
+volumes:
+  database:
+  uploads:
+  runtime:

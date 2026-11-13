@@ -1,0 +1,41 @@
+FROM node:24-bookworm-slim AS node_tools
+FROM composer:2 AS composer_tools
+
+FROM php:8.2.35-apache
+
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        git unzip ca-certificates libatomic1 \
+        libicu-dev libgd-dev libzip-dev \
+    && docker-php-ext-install mysqli bcmath intl gd zip \
+    && a2enmod rewrite \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --from=composer_tools /usr/bin/composer /usr/local/bin/composer
+COPY --from=node_tools /usr/local/bin/node /usr/local/bin/node
+COPY --from=node_tools /usr/local/lib/node_modules /usr/local/lib/node_modules
+
+RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm \
+    && ln -s /usr/local/lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx
+
+RUN git config --global url."https://github.com/".insteadOf "ssh://git@github.com/" \
+    && git config --global --add url."https://github.com/".insteadOf "git@github.com:"
+
+WORKDIR /app
+
+COPY Code/ospos/ /app/
+
+RUN composer install --no-interaction --prefer-dist \
+    && npm ci --no-audit --no-fund \
+    && npm run build
+
+RUN chown -R www-data:www-data /app/writable /app/public/uploads \
+    && rm -rf /var/www/html \
+    && ln -s /app/public /var/www/html
+
+RUN printf 'date.timezone=Asia/Ho_Chi_Minh\n' \
+    > /usr/local/etc/php/conf.d/timezone.ini
+
+EXPOSE 80

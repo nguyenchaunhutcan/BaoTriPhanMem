@@ -2,9 +2,17 @@
 
 ## Trạng thái
 
-Đã xác nhận nguồn OSPOS 3.4.3 và tạo mốc Git bản gốc. Ứng dụng chưa được cài đặt hoặc kiểm chứng chạy thành công. Chưa có kết quả kiểm thử ứng dụng.
+Đã xác nhận nguồn OSPOS 3.4.3 và tạo mốc Git bản gốc. Đã build thành công image ospos-project2:3.4.3 và chạy ứng dụng
+bằng Docker Compose với MariaDB 10.11.
 
-Máy chuẩn bị repo đã có Git, Node.js và Docker Desktop. Mỗi thành viên cần kiểm tra lại môi trường trên máy mình; ghi phiên bản thực tế vào nhật ký khi thực hiện.
+Đã khởi tạo cơ sở dữ liệu và đăng nhập thành công tại
+http://localhost:8080.
+
+Kiểm tra ban đầu: tạo mặt hàng “Vở kiểm thử” với tồn kho 10,
+giá bán 15000; bán 2 sản phẩm, tổng tiền trên màn hình thanh toán
+là 30000. Sau khi hoàn tất giao dịch, tồn kho còn 8.
+
+Ảnh minh chứng được lưu trong evidence/setup/.
 
 ## Bước tiếp theo do người học thực hiện
 
